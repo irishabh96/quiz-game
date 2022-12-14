@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en" class="dark">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+      // theme settings
+      tailwind.config = {
+        darkMode: 'class',
+      };
+
+      // setting the default theme
+      if (
+        window.localStorage.getItem('theme') === 'dark' ||
+        (!('theme' in window.localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)
+      ) {
+        document.documentElement.classList.add('dark');
+      } else {
+        document.documentElement.classList.remove('dark');
+      }
+    </script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/4.1.1/crypto-js.min.js"></script>
+    <title>Games by Sauce Labs</title>
+  </head>
+  <body class="bg-gradient-to-r from-indigo-500">
+    <!-- toggle theme dark / light -->
+    <div class="m-6">
+      <label class="inline-flex relative items-center cursor-pointer">
+        <input id="toggle-theme" type="checkbox" value="" class="sr-only peer" />
+        <div
+          class="w-11 h-6 bg-gray-200 peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-blue-300 dark:peer-focus:ring-blue-800 rounded-full peer dark:bg-gray-700 peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all dark:border-gray-600 peer-checked:bg-blue-600"
+        ></div>
+        <span class="ml-3 text-sm font-medium text-gray-900 dark:text-gray-300">Toggle Theme</span>
+      </label>
+    </div>
+
+    <!-- main section -->
+
+    <div class="flex h-screen">
+      <div
+        id="content-div"
+        class="bg-white m-auto dark:bg-slate-800 rounded-lg px-6 py-5 ring-1 w-3/6 ring-slate-900/5 shadow-xl h-20"
+      >
+        <!-- Start game button -->
+        <div class="flex">
+          <button
+            id="start-game"
+            type="button"
+            class="focus:outline-none text-white bg-purple-700 hover:bg-purple-800 focus:ring-4 focus:ring-purple-300 font-medium rounded-lg text-sm px-5 py-2.5 mb-2 dark:bg-purple-600 dark:hover:bg-purple-700 dark:focus:ring-purple-900 w-2/3 m-auto"
+          >
+            Start Game
+          </button>
+        </div>
+
+        <!-- Question -->
+        <div id="question-section" class="invisible">
+          <p id="question" class="text-slate-900 dark:text-white my-3 text-lg font-medium tracking-tight">
+            Fetching questions..
+          </p>
+        </div>
+
+        <!-- Answer input -->
+        <form id="form-hero">
+          <div id="answer-section" class="invisible">
+            <div class="inline-grid sm:grid-cols-1 md:grid-cols-[80%_1fr] gap-4 w-full">
+              <div>
+                <input
+                  type="text"
+                  required
+                  minlength="3"
+                  id="answer"
+                  class="border border-purple-500 dark:border-black text-black dark:text-white placeholder-white dark:placeholder-white text-sm rounded-lg w-full block p-2.5 dark:bg-gray-700 dark:border-black-500"
+                  placeholder="Type your answer .. "
+                />
+              </div>
+              <div>
+                <button
+                  type="submit"
+                  class="focus:outline-none text-white bg-purple-700 hover:bg-purple-800 focus:ring-4 focus:ring-purple-300 font-medium rounded-lg text-sm px-5 py-2.5 mb-2 dark:bg-purple-600 dark:hover:bg-purple-700 dark:focus:ring-purple-900 w-full"
+                >
+                  Submit
+                </button>
+              </div>
+            </div>
+          </div>
+        </form>
+
+        <!-- Score -->
+        <div id="score-section" class="mt-5 invisible">
+          <div class="flex items-center justify-between">
+            <div>
+              <p class="text-slate-900 dark:text-white my-3 text-base font-medium tracking-tight">Score</p>
+              <p id="score" class="text-slate-500 dark:text-slate-400 mt-0 text-base font-medium">0</p>
+            </div>
+            <div>
+              <p class="text-slate-900 dark:text-white my-3 text-base font-medium tracking-tight">Chances</p>
+              <p id="remaining-chances" class="text-slate-500 dark:text-slate-400 mt-0 text-base font-medium">3</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <script src="./assets/js/script.js"></script>
+  </body>
+</html>
